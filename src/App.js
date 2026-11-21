@@ -54,6 +54,8 @@ class App extends React.Component {
     const color = colors[index];
     const style = {backgroundColor: color};
     const textStyle = {color: color};
+    const shareText = quote ? `"${quote.quote}" - ${quote.author}` : '';
+    const encodedShareText = encodeURIComponent(shareText);
     console.log(color,colors)
     
     return (
@@ -74,8 +76,8 @@ class App extends React.Component {
               }
             <div className="d-flex text-light justify-content-between">
               <div>
-                <button style={style} className="btn-size btn btn-default"> <a id="tweet-quote" href="#" className="text-light btn-size"><FaTwitter /></a></button>
-                <button style={style} className="btn-size btn btn-default"> <a id="tumblr-quote" href="#" className="text-light btn-size"><FaTumblr /></a></button>
+                <a id="tweet-quote" href={`https://twitter.com/intent/tweet?text=${encodedShareText}`} style={style} className="btn-size btn btn-default text-light"><FaTwitter /></a>
+                <a id="tumblr-quote" href={`https://www.tumblr.com/widgets/share/tool?posttype=quote&quote=${encodedShareText}`} style={style} className="btn-size btn btn-default text-light"><FaTumblr /></a>
               </div>
               <button id="new-quote" style={style} onClick={this.handleClick} className="btn btn-default text-light">New quote</button>
             </div>
